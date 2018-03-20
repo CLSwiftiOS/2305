@@ -16,6 +16,7 @@
 		963562C82056B875004476AA /* AudiBeaconTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963562C72056B875004476AA /* AudiBeaconTests.swift */; };
 		963562D32056B875004476AA /* AudiBeaconUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963562D22056B875004476AA /* AudiBeaconUITests.swift */; };
 		9644A6442059386300FCE5DD /* Notizen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9644A6432059386300FCE5DD /* Notizen.swift */; };
+		96A781E9205D97720043F6AC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A781E8205D97720043F6AC /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		963562D22056B875004476AA /* AudiBeaconUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudiBeaconUITests.swift; sourceTree = "<group>"; };
 		963562D42056B875004476AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9644A6432059386300FCE5DD /* Notizen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notizen.swift; sourceTree = "<group>"; };
+		96A781E8205D97720043F6AC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				963562AF2056B875004476AA /* AppDelegate.swift */,
 				963562B12056B875004476AA /* ViewController.swift */,
+				96A781E8205D97720043F6AC /* Extensions.swift */,
 				9644A6432059386300FCE5DD /* Notizen.swift */,
 				963562B32056B875004476AA /* Main.storyboard */,
 				963562B92056B875004476AA /* Assets.xcassets */,
@@ -265,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96A781E9205D97720043F6AC /* Extensions.swift in Sources */,
 				963562B82056B875004476AA /* AudiBeacon.xcdatamodeld in Sources */,
 				963562B22056B875004476AA /* ViewController.swift in Sources */,
 				963562B02056B875004476AA /* AppDelegate.swift in Sources */,
@@ -436,6 +440,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E8EBL25426;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/kontakt-ios-sdk/KontaktSDK/iOS",
+				);
 				INFOPLIST_FILE = AudiBeacon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CL.AudiBeacon;
@@ -451,6 +459,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E8EBL25426;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/kontakt-ios-sdk/KontaktSDK/iOS",
+				);
 				INFOPLIST_FILE = AudiBeacon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CL.AudiBeacon;

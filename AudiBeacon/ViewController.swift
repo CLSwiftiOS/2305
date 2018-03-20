@@ -7,10 +7,12 @@
 //
 
 import UIKit
-import CoreBluetooth
 import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
+    
+    
+    
     
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var view2: UIView!
@@ -18,37 +20,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var view4: UIView!
     @IBOutlet weak var lblAusgabe: UILabel!
     
-    var oldBuffer1 = CGFloat(0)
-    var oldBuffer2 = CGFloat(0)
+    var pulsatingLayer: CAShapeLayer!
+    
     var oldBuffer3 = CGFloat(0)
-    var oldBuffer4 = CGFloat(0)
-    
-    let basicAnimation1 = CABasicAnimation(keyPath: "strokeEnd")
-    let basicAnimation2 = CABasicAnimation(keyPath: "strokeEnd")
     let basicAnimation3 = CABasicAnimation(keyPath: "strokeEnd")
-    let basicAnimation4 = CABasicAnimation(keyPath: "strokeEnd")
-    
-    let shapeLayer2 = CAShapeLayer()
     let shapeLayer3 = CAShapeLayer()
-    let shapeLayer1 = CAShapeLayer()
-    let shapeLayer4 = CAShapeLayer()
-    
-    let animationDuration: CFTimeInterval = 0.5
+    let animationDuration: CFTimeInterval = 1.5
     var timer = Timer()
     var beacon: CLBeacon?
     let locationManager = CLLocationManager()
     let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")!, identifier: "WEB-EDV")
-    
+    let animation = CABasicAnimation(keyPath: "transform.scale")
     override func viewDidLoad() {
-
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(ViewController.timerFunc), userInfo: nil, repeats: true)
+        lblAusgabe.textColor = .white
+        timer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(ViewController.timerFunc), userInfo: nil, repeats: true)
         super.viewDidLoad()
-        basicAnimation1.toValue = 0
         basicAnimation3.toValue = 0
-        basicAnimation2.toValue = 0
-        basicAnimation4.toValue = 0
         locationManager.delegate = self
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.backgroundColor
         view1.backgroundColor = UIColor.clear
         view2.backgroundColor = UIColor.clear
         view3.backgroundColor = UIColor.clear
@@ -59,160 +48,130 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
         locationManager.startRangingBeacons(in: region)
         
-        let radius: CGFloat = 60
-        let shaperLineWidth: CGFloat = 5
-        let circularPath3 = UIBezierPath(arcCenter: view3.center, radius: radius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-        let circularPath2 = UIBezierPath(arcCenter: view2.center, radius: radius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-        let circularPath1 = UIBezierPath(arcCenter: view1.center, radius: radius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-        let circularPath4 = UIBezierPath(arcCenter: view4.center, radius: radius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+        let radius: CGFloat = 80
+        let shaperLineWidth: CGFloat = 20
+        let circularPath3 = UIBezierPath(arcCenter: .zero, radius: radius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
         
-        let trackLayer1 = CAShapeLayer()
-        trackLayer1.path = circularPath1.cgPath
-        trackLayer1.fillColor = UIColor.clear.cgColor
-        trackLayer1.strokeColor = UIColor.lightGray.cgColor
-        trackLayer1.lineWidth = shaperLineWidth
-        trackLayer1.lineCap = kCALineCapRound
-        view.layer.addSublayer(trackLayer1)
-        
-        shapeLayer1.path = circularPath1.cgPath
-        shapeLayer1.strokeColor = UIColor.red.cgColor
-        shapeLayer1.lineWidth = shaperLineWidth
-        shapeLayer1.lineCap = kCALineCapRound
-        shapeLayer1.fillColor = UIColor.clear.cgColor
-        shapeLayer1.strokeEnd = 0
-        view.layer.addSublayer(shapeLayer1)
-        
-        let trackLayer2 = CAShapeLayer()
-        trackLayer2.path = circularPath2.cgPath
-        trackLayer2.fillColor = UIColor.clear.cgColor
-        trackLayer2.strokeColor = UIColor.lightGray.cgColor
-        trackLayer2.lineWidth = shaperLineWidth
-        trackLayer2.lineCap = kCALineCapRound
-        view.layer.addSublayer(trackLayer2)
-        
-        shapeLayer2.path = circularPath2.cgPath
-        shapeLayer2.fillColor = UIColor.clear.cgColor
-        shapeLayer2.lineCap = kCALineCapRound
-        shapeLayer2.lineWidth = shaperLineWidth
-        shapeLayer2.strokeColor = UIColor.red.cgColor
-        shapeLayer2.strokeEnd = 0
-        view.layer.addSublayer(shapeLayer2)
+        pulsatingLayer = CAShapeLayer()
+        pulsatingLayer.path = circularPath3.cgPath
+        pulsatingLayer.strokeColor = UIColor.clear.cgColor
+        pulsatingLayer.fillColor = UIColor.pulsatingFillColor.cgColor
+        pulsatingLayer.lineWidth = 10
+        pulsatingLayer.lineCap = kCALineCapRound
+        pulsatingLayer.position = view3.center
+        view.layer.addSublayer(pulsatingLayer)
         
         
         let trackLayer3 = CAShapeLayer()
         trackLayer3.path = circularPath3.cgPath
-        trackLayer3.strokeColor = UIColor.lightGray.cgColor
-        trackLayer3.fillColor = UIColor.clear.cgColor
+        trackLayer3.strokeColor = UIColor.trackStrokeColor.cgColor
+        trackLayer3.fillColor = UIColor.backgroundColor.cgColor
         trackLayer3.lineWidth = shaperLineWidth
         trackLayer3.lineCap = kCALineCapRound
+        trackLayer3.position = view3.center
         view.layer.addSublayer(trackLayer3)
         
+        shapeLayer3.position = view3.center
         shapeLayer3.path = circularPath3.cgPath
-        shapeLayer3.strokeColor = UIColor.red.cgColor
+        shapeLayer3.strokeColor = UIColor.outlineStrokeColor.cgColor
         shapeLayer3.lineWidth = shaperLineWidth
         shapeLayer3.lineCap = kCALineCapRound
         shapeLayer3.fillColor = UIColor.clear.cgColor
         shapeLayer3.strokeEnd = 0
         view.layer.addSublayer(shapeLayer3)
-        
-        let trackLayer4 = CAShapeLayer()
-        trackLayer4.path = circularPath4.cgPath
-        trackLayer4.strokeColor = UIColor.lightGray.cgColor
-        trackLayer4.fillColor = UIColor.clear.cgColor
-        trackLayer4.lineWidth = shaperLineWidth
-        trackLayer4.lineCap = kCALineCapRound
-        view.layer.addSublayer(trackLayer4)
-        
-        shapeLayer4.path = circularPath4.cgPath
-        shapeLayer4.strokeColor = UIColor.red.cgColor
-        shapeLayer4.lineWidth = shaperLineWidth
-        shapeLayer4.lineCap = kCALineCapRound
-        shapeLayer4.fillColor = UIColor.clear.cgColor
-        shapeLayer4.strokeEnd = 0
-        view.layer.addSublayer(shapeLayer4)
-        
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ViewController.animateCircle)))
+    }
+    
+    private func animatePulsatingLayer() {
+        animation.toValue = 1.5
+        animation.duration = 1
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        animation.autoreverses = true
+        animation.repeatCount = Float.infinity
+        pulsatingLayer.add(animation, forKey: "pulsing")
     }
     
     @objc func timerFunc() {
         animateCircle()
+        locationManager.startUpdatingLocation()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-        
-        for i in 0...5 {
-            let testBeacon = beacons[i].minor.intValue
-            switch testBeacon {
-            case 42263:
-                let tempBeacon = beacons[i].accuracy
-                basicAnimation2.toValue = 1 - tempBeacon
-                print("case 1")
-            case 58690:
-                let tempBeacon = beacons[i].accuracy
-                basicAnimation4.toValue = 1 - tempBeacon
-                print("case 2")
-            case 24984:
-                let tempBeacon = beacons[i].accuracy
-                basicAnimation1.toValue = 1 - tempBeacon
-                print("case 3")
-            case 16713:
-                let tempBeacon = beacons[i].accuracy
-                basicAnimation3.toValue = 1 - tempBeacon
-                print("case 4")
-            default:
-                print("kein Case gefunden")
-            }
-        }
-        
         let knowBeacons = beacons.filter{ $0.proximity == CLProximity.immediate || $0.proximity == CLProximity.near || $0.proximity == CLProximity.far}
         if knowBeacons.count > 0 {
+            //            let date = Date()
+            //            print(date)
             
-        
-            //let iBeacon = knowBeacons.first!
-            //let whichBeacon = iBeacon.minor.intValue
-           
-            /*switch whichBeacon {
-            case 42263:
-                lblAusgabe.text = String(accuracy3)
-            case 22438:
-                lblAusgabe.text = String(accuracy3)
-            case 24984:
-                lblAusgabe.text = String(accuracy3)
-            case 16713:
-                lblAusgabe.text = String(accuracy3)
-            default:
-                print("XAyT wurde nicht gefunden")
-                print(accuracy3)
-                lblAusgabe.text = String(accuracy3)
-            }*/
+            let iBeacon = knowBeacons.first!
+            let whichBeacon = iBeacon.minor.intValue
+            let tempBeacon = iBeacon.accuracy
+            lblAusgabe.text = String(tempBeacon)
+            if tempBeacon < 0.2 {
+                basicAnimation3.toValue = 1
+            } else if tempBeacon < 0.4 && tempBeacon > 0.2 {
+                basicAnimation3.toValue = 0.9
+            } else if tempBeacon > 0.4 && tempBeacon < 0.6 {
+                basicAnimation3.toValue = 0.8
+            } else if tempBeacon > 0.6 && tempBeacon < 0.8 {
+                basicAnimation3.toValue = 0.7
+            } else if tempBeacon > 0.8 && tempBeacon < 1.0 {
+                basicAnimation3.toValue = 0.6
+            } else if tempBeacon > 1.0 && tempBeacon < 1.2 {
+                basicAnimation3.toValue = 0.5
+            } else if tempBeacon > 1.2 && tempBeacon < 1.4 {
+                basicAnimation3.toValue = 0.4
+            } else if tempBeacon > 1.4 && tempBeacon < 2.0 {
+                basicAnimation3.toValue = 0.3
+            } else { //hier könnten wir noch genauere Filter einsetzen. Gute Werte zu finden ist jedoch schwer
+                basicAnimation3.toValue = 0.0
+            }
+            
+            
+            //            switch whichBeacon {
+            //            case 24984:
+            //
+            ////                var tempBeacon = CLLocationAccuracy()
+            //                print(tempBeacon)
+            ////                tempRange = 1 - tempBeacon
+            ////                print(tempRange)
+            ////                if tempBeacon < 0.2 {
+            ////                    basicAnimation3.toValue = 1
+            ////                } else if tempBeacon < 0.4 && tempBeacon > 0.2 {
+            ////                    basicAnimation3.toValue = 0.9
+            ////                } else if tempBeacon > 0.4 && tempBeacon < 0.6 {
+            ////                    basicAnimation3.toValue = 0.8
+            ////                } else if tempBeacon > 0.6 && tempBeacon < 0.8 {
+            ////                    basicAnimation3.toValue = 0.7
+            ////                } else if tempBeacon > 0.8 && tempBeacon < 1.0 {
+            ////                    basicAnimation3.toValue = 0.6
+            ////                } else if tempBeacon > 1.0 && tempBeacon < 1.2 {
+            ////                    basicAnimation3.toValue = 0.5
+            ////                } else if tempBeacon > 1.2 && tempBeacon < 1.4 {
+            ////                    basicAnimation3.toValue = 0.4
+            ////                } else if tempBeacon > 1.4 && tempBeacon < 2.0 {
+            ////                    basicAnimation3.toValue = 0.3
+            ////                } else { //hier könnten wir noch genauere Filter einsetzen. Gute Werte zu finden ist jedoch schwer
+            ////                    basicAnimation3.toValue = 0.0
+            ////            }
+            //            default:
+            //            print("XAyT wurde nicht gefunden")
+            //        }
         }
     }
     
     @objc private func animateCircle() {
-        basicAnimation1.duration = animationDuration
-        basicAnimation2.duration = animationDuration
+        
         basicAnimation3.duration = animationDuration
-        basicAnimation4.duration = animationDuration
-        basicAnimation1.fromValue = oldBuffer1
-        basicAnimation2.fromValue = oldBuffer2
         basicAnimation3.fromValue = oldBuffer3
-        basicAnimation4.fromValue = oldBuffer4
-        oldBuffer1 = basicAnimation1.toValue as! CGFloat
-        oldBuffer2 = basicAnimation2.toValue as! CGFloat
         oldBuffer3 = basicAnimation3.toValue as! CGFloat
-        oldBuffer4 = basicAnimation4.toValue as! CGFloat
-        basicAnimation1.fillMode = kCAFillModeForwards
-        basicAnimation2.fillMode = kCAFillModeForwards
         basicAnimation3.fillMode = kCAFillModeForwards
-        basicAnimation4.fillMode = kCAFillModeForwards
-        basicAnimation1.isRemovedOnCompletion = false
-        basicAnimation2.isRemovedOnCompletion = false
         basicAnimation3.isRemovedOnCompletion = false
-        basicAnimation4.isRemovedOnCompletion = false
-        shapeLayer2.add(basicAnimation2, forKey: "urSoBasic2")
         shapeLayer3.add(basicAnimation3, forKey: "urSoBasic3")
-        shapeLayer1.add(basicAnimation1, forKey: "urSoBasic1")
-        shapeLayer4.add(basicAnimation4, forKey: "urSoBasic4")
+        
         
         
     }
