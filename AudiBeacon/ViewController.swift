@@ -32,6 +32,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")!, identifier: "WEB-EDV")
     let animation = CABasicAnimation(keyPath: "transform.scale")
     override func viewDidLoad() {
+        animation.duration = 1
+        
         lblAusgabe.textColor = .white
         timer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(ViewController.timerFunc), userInfo: nil, repeats: true)
         super.viewDidLoad()
@@ -83,17 +85,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     private func animatePulsatingLayer() {
-        animation.toValue = 1.5
-        animation.duration = 1
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        animation.toValue = 1.4
+        animation.repeatCount = 1
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         animation.autoreverses = true
-        animation.repeatCount = Float.infinity
         pulsatingLayer.add(animation, forKey: "pulsing")
     }
     
     @objc func timerFunc() {
         animateCircle()
-        locationManager.startUpdatingLocation()
+        animatePulsatingLayer()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -110,25 +111,27 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let whichBeacon = iBeacon.minor.intValue
             let tempBeacon = iBeacon.accuracy
             lblAusgabe.text = String(tempBeacon)
-            if tempBeacon < 0.2 {
+            if tempBeacon < 0.5 {
+                animation.duration = 1
                 basicAnimation3.toValue = 1
-            } else if tempBeacon < 0.4 && tempBeacon > 0.2 {
+            } else if tempBeacon > 0.5 && tempBeacon < 0.8 {
                 basicAnimation3.toValue = 0.9
-            } else if tempBeacon > 0.4 && tempBeacon < 0.6 {
+            } else if tempBeacon > 0.8 && tempBeacon < 1.1 {
                 basicAnimation3.toValue = 0.8
-            } else if tempBeacon > 0.6 && tempBeacon < 0.8 {
+            } else if tempBeacon > 1.1 && tempBeacon < 1.4 {
                 basicAnimation3.toValue = 0.7
-            } else if tempBeacon > 0.8 && tempBeacon < 1.0 {
+            } else if tempBeacon > 1.4 && tempBeacon < 1.7 {
                 basicAnimation3.toValue = 0.6
-            } else if tempBeacon > 1.0 && tempBeacon < 1.2 {
+            } else if tempBeacon > 1.7 && tempBeacon < 2.0 {
                 basicAnimation3.toValue = 0.5
-            } else if tempBeacon > 1.2 && tempBeacon < 1.4 {
+            } else if tempBeacon > 2.0 && tempBeacon < 2.3 {
                 basicAnimation3.toValue = 0.4
-            } else if tempBeacon > 1.4 && tempBeacon < 2.0 {
+            } else if tempBeacon > 2.3 && tempBeacon < 2.9 {
                 basicAnimation3.toValue = 0.3
-            } else { //hier könnten wir noch genauere Filter einsetzen. Gute Werte zu finden ist jedoch schwer
+            } else { //hier könnten wir noch genauere Filter einsetzen.
                 basicAnimation3.toValue = 0.0
             }
+            
             
             
             //            switch whichBeacon {
@@ -171,6 +174,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         basicAnimation3.fillMode = kCAFillModeForwards
         basicAnimation3.isRemovedOnCompletion = false
         shapeLayer3.add(basicAnimation3, forKey: "urSoBasic3")
+        animatePulsatingLayer()
         
         
         
