@@ -16,7 +16,20 @@
 		963562C82056B875004476AA /* AudiBeaconTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963562C72056B875004476AA /* AudiBeaconTests.swift */; };
 		963562D32056B875004476AA /* AudiBeaconUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963562D22056B875004476AA /* AudiBeaconUITests.swift */; };
 		9644A6442059386300FCE5DD /* Notizen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9644A6432059386300FCE5DD /* Notizen.swift */; };
+		964DA24F2074D16B007BD142 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 964DA24E2074D16A007BD142 /* Back.png */; };
+		964DA2512074F246007BD142 /* back-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 964DA2502074F246007BD142 /* back-small.png */; };
+		964DA2532077B18B007BD142 /* repeat.png in Resources */ = {isa = PBXBuildFile; fileRef = 964DA2522077B18B007BD142 /* repeat.png */; };
+		96601940206A6BD6002D1496 /* AudiType-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9660193F206A697A002D1496 /* AudiType-Normal.ttf */; };
 		96A781E9205D97720043F6AC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A781E8205D97720043F6AC /* Extensions.swift */; };
+		96A781EC206155920043F6AC /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A781EA206155920043F6AC /* QuestionView.swift */; };
+		96A781ED206155920043F6AC /* QuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96A781EB206155920043F6AC /* QuestionView.xib */; };
+		96A781F0206293D70043F6AC /* point.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A781EF206293D70043F6AC /* point.png */; };
+		96BE120D206BB80F002B9281 /* Sternen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 96BE120C206BB80F002B9281 /* Sternen.jpg */; };
+		96BE1214206D1629002B9281 /* AudiType-ExtendedNormal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96BE1212206D1629002B9281 /* AudiType-ExtendedNormal.ttf */; };
+		96BE1215206D1629002B9281 /* AudiType-ExtendedBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96BE1213206D1629002B9281 /* AudiType-ExtendedBold.ttf */; };
+		96BE121E20738761002B9281 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BE121B20738761002B9281 /* Bubble.swift */; };
+		96BE121F20738761002B9281 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BE121C20738761002B9281 /* Line.swift */; };
+		96BE122020738761002B9281 /* PopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BE121D20738761002B9281 /* PopView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +65,20 @@
 		963562D22056B875004476AA /* AudiBeaconUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudiBeaconUITests.swift; sourceTree = "<group>"; };
 		963562D42056B875004476AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9644A6432059386300FCE5DD /* Notizen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notizen.swift; sourceTree = "<group>"; };
+		964DA24E2074D16A007BD142 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
+		964DA2502074F246007BD142 /* back-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-small.png"; sourceTree = "<group>"; };
+		964DA2522077B18B007BD142 /* repeat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = repeat.png; sourceTree = "<group>"; };
+		9660193F206A697A002D1496 /* AudiType-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AudiType-Normal.ttf"; sourceTree = "<group>"; };
 		96A781E8205D97720043F6AC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		96A781EA206155920043F6AC /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		96A781EB206155920043F6AC /* QuestionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionView.xib; sourceTree = "<group>"; };
+		96A781EF206293D70043F6AC /* point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = point.png; sourceTree = "<group>"; };
+		96BE120C206BB80F002B9281 /* Sternen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sternen.jpg; sourceTree = "<group>"; };
+		96BE1212206D1629002B9281 /* AudiType-ExtendedNormal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AudiType-ExtendedNormal.ttf"; sourceTree = "<group>"; };
+		96BE1213206D1629002B9281 /* AudiType-ExtendedBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AudiType-ExtendedBold.ttf"; sourceTree = "<group>"; };
+		96BE121B20738761002B9281 /* Bubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
+		96BE121C20738761002B9281 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		96BE121D20738761002B9281 /* PopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +109,10 @@
 		963562A32056B875004476AA = {
 			isa = PBXGroup;
 			children = (
+				96BE1213206D1629002B9281 /* AudiType-ExtendedBold.ttf */,
+				96BE1212206D1629002B9281 /* AudiType-ExtendedNormal.ttf */,
+				9660193F206A697A002D1496 /* AudiType-Normal.ttf */,
+				96BE121A20738761002B9281 /* Pop */,
 				963562AE2056B875004476AA /* AudiBeacon */,
 				963562C62056B875004476AA /* AudiBeaconTests */,
 				963562D12056B875004476AA /* AudiBeaconUITests */,
@@ -103,11 +133,15 @@
 		963562AE2056B875004476AA /* AudiBeacon */ = {
 			isa = PBXGroup;
 			children = (
+				96A781F1206293F00043F6AC /* Media */,
+				96A781EB206155920043F6AC /* QuestionView.xib */,
+				96A781EA206155920043F6AC /* QuestionView.swift */,
 				963562AF2056B875004476AA /* AppDelegate.swift */,
 				963562B12056B875004476AA /* ViewController.swift */,
 				96A781E8205D97720043F6AC /* Extensions.swift */,
 				9644A6432059386300FCE5DD /* Notizen.swift */,
 				963562B32056B875004476AA /* Main.storyboard */,
+				96BE120C206BB80F002B9281 /* Sternen.jpg */,
 				963562B92056B875004476AA /* Assets.xcassets */,
 				963562BB2056B875004476AA /* LaunchScreen.storyboard */,
 				963562BE2056B875004476AA /* Info.plist */,
@@ -132,6 +166,27 @@
 				963562D42056B875004476AA /* Info.plist */,
 			);
 			path = AudiBeaconUITests;
+			sourceTree = "<group>";
+		};
+		96A781F1206293F00043F6AC /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				964DA2522077B18B007BD142 /* repeat.png */,
+				964DA24E2074D16A007BD142 /* Back.png */,
+				964DA2502074F246007BD142 /* back-small.png */,
+				96A781EF206293D70043F6AC /* point.png */,
+			);
+			name = Media;
+			sourceTree = "<group>";
+		};
+		96BE121A20738761002B9281 /* Pop */ = {
+			isa = PBXGroup;
+			children = (
+				96BE121B20738761002B9281 /* Bubble.swift */,
+				96BE121C20738761002B9281 /* Line.swift */,
+				96BE121D20738761002B9281 /* PopView.swift */,
+			);
+			path = Pop;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,9 +296,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96BE1214206D1629002B9281 /* AudiType-ExtendedNormal.ttf in Resources */,
+				96BE1215206D1629002B9281 /* AudiType-ExtendedBold.ttf in Resources */,
+				964DA24F2074D16B007BD142 /* Back.png in Resources */,
+				96601940206A6BD6002D1496 /* AudiType-Normal.ttf in Resources */,
+				96A781ED206155920043F6AC /* QuestionView.xib in Resources */,
 				963562BD2056B875004476AA /* LaunchScreen.storyboard in Resources */,
+				964DA2532077B18B007BD142 /* repeat.png in Resources */,
+				96A781F0206293D70043F6AC /* point.png in Resources */,
+				96BE120D206BB80F002B9281 /* Sternen.jpg in Resources */,
 				963562BA2056B875004476AA /* Assets.xcassets in Resources */,
 				963562B52056B875004476AA /* Main.storyboard in Resources */,
+				964DA2512074F246007BD142 /* back-small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +336,10 @@
 				963562B82056B875004476AA /* AudiBeacon.xcdatamodeld in Sources */,
 				963562B22056B875004476AA /* ViewController.swift in Sources */,
 				963562B02056B875004476AA /* AppDelegate.swift in Sources */,
+				96BE121E20738761002B9281 /* Bubble.swift in Sources */,
+				96BE121F20738761002B9281 /* Line.swift in Sources */,
+				96A781EC206155920043F6AC /* QuestionView.swift in Sources */,
+				96BE122020738761002B9281 /* PopView.swift in Sources */,
 				9644A6442059386300FCE5DD /* Notizen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
