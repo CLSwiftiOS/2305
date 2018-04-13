@@ -82,7 +82,6 @@ class QuestionView: UIViewController {
     @objc func tapGestureFunction() {
         if tapCount == true {
             performSegue(withIdentifier: "GoBack", sender: nil)
-            
         }
     }
     
@@ -127,10 +126,11 @@ class QuestionView: UIViewController {
         btnRestart.isHidden = true
         btnRestart.isUserInteractionEnabled = false
         if time <= 0 {
+            tapCount = true
+            vRichtig = true
             if let index = gefundeneBeacon.index(of: vMinorTemp) {
                 gefundeneBeacon.remove(at: index)
             }
-            vRichtig = true
             vWelcheFrage = vWelcheFrage + 1
             UserDefaults.standard.set(aQuestions, forKey: "Fragen")
             UserDefaults.standard.set(antworten, forKey: "Antworten")

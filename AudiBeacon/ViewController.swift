@@ -29,6 +29,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
     @IBOutlet weak var lblAudi2: UILabel!
     @IBOutlet weak var lblAusgabe: UILabel!
     
+    @IBOutlet weak var btnFire: UIButton!
     @IBOutlet weak var btnRepeat: UIButton!
     
     
@@ -99,6 +100,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
     }
    
     override func viewDidLoad() {
+        btnFire.isUserInteractionEnabled = false
+        //isNear = true wird nur für den Simulator benötigt, da kein Bluetooth
         btnRepeat.isHidden = true
         btnRepeat.isUserInteractionEnabled = false
         print(gefundeneBeacon)
@@ -129,6 +132,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Go" {
             if let QuestionViewX  = segue.destination as? QuestionView {
+                //tempBeaconMinor = 16713  wird nur beim Simulator benötigt da Minor für Frage übergeben werden muss
                 QuestionViewX.vWelcheFrage = vPointZaehler
                 QuestionViewX.gefundeneBeacon = gefundeneBeacon
                 QuestionViewX.vMinorTemp = tempBeaconMinor
@@ -303,28 +307,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
             tempBeaconMinor = iBeacon.minor as! Int
             if gefundeneBeacon.contains(tempBeaconMinor) {
                 let tempBeacon = iBeacon.accuracy
-                lblAusgabe.text = String(tempBeacon)
+                //lblAusgabe.text = String(tempBeacon)
                 //let vToValue = 1 - iBeacon.accuracy
-                if tempBeacon < 0.5 {
+                if tempBeacon < 0.6 {
                     isNear = true
-                    rangeToBeaconAnimation.toValue = 1
-                }  else if tempBeacon >= 0.5 && tempBeacon < 0.8 {
-                    isNear = false 
-                    rangeToBeaconAnimation.toValue = 0.7
-                } else if tempBeacon >= 0.5 && tempBeacon < 0.8 {
-                    isNear = false
-                    rangeToBeaconAnimation.toValue = 0.7
-                } else if tempBeacon >= 0.8 && tempBeacon < 1.1 {
-                    isNear = false
-                    rangeToBeaconAnimation.toValue = 0.5
-                } else if tempBeacon >= 1.1 && tempBeacon < 1.5 {
-                    isNear = false
-                    rangeToBeaconAnimation.toValue = 0.4
-                } else if tempBeacon >= 1.5 && tempBeacon < 2.0 {
-                    isNear = false
-                    rangeToBeaconAnimation.toValue = 0.2
                 } else {
                     isNear = false
+                }
+                if tempBeacon < 0.6 {
+                    rangeToBeaconAnimation.toValue = 1
+                }  else if tempBeacon >= 0.6 && tempBeacon < 0.8 {
+                    rangeToBeaconAnimation.toValue = 0.7
+                } else if tempBeacon >= 0.8 && tempBeacon < 1.1 {
+                    rangeToBeaconAnimation.toValue = 0.5
+                } else if tempBeacon >= 1.1 && tempBeacon < 1.5 {
+                    rangeToBeaconAnimation.toValue = 0.4
+                } else if tempBeacon >= 1.5 && tempBeacon < 2.0 {
+                    rangeToBeaconAnimation.toValue = 0.2
+                } else {
                     rangeToBeaconAnimation.toValue = 0.0
                 }
             } else {
@@ -332,28 +332,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
                 tempBeaconMinor = iBeacon.minor as! Int
                 if gefundeneBeacon.contains(tempBeaconMinor) {
                     let tempBeacon = iBeacon.accuracy
-                    lblAusgabe.text = String(tempBeacon)
+                    //lblAusgabe.text = String(tempBeacon)
                     //let vToValue = 1 - iBeacon.accuracy
-                    if tempBeacon < 0.5 {
+                    if tempBeacon < 0.6 {
                         isNear = true
-                        rangeToBeaconAnimation.toValue = 1
-                    }  else if tempBeacon >= 0.5 && tempBeacon < 0.8 {
-                        isNear = false
-                        rangeToBeaconAnimation.toValue = 0.7
-                    } else if tempBeacon >= 0.5 && tempBeacon < 0.8 {
-                        isNear = false
-                        rangeToBeaconAnimation.toValue = 0.7
-                    } else if tempBeacon >= 0.8 && tempBeacon < 1.1 {
-                        isNear = false
-                        rangeToBeaconAnimation.toValue = 0.5
-                    } else if tempBeacon >= 1.1 && tempBeacon < 1.5 {
-                        isNear = false
-                        rangeToBeaconAnimation.toValue = 0.4
-                    } else if tempBeacon >= 1.5 && tempBeacon < 2.0 {
-                        isNear = false
-                        rangeToBeaconAnimation.toValue = 0.2
                     } else {
                         isNear = false
+                    }
+                    if tempBeacon < 0.6 {
+                        rangeToBeaconAnimation.toValue = 1
+                    }  else if tempBeacon >= 0.6 && tempBeacon < 0.8 {
+                        rangeToBeaconAnimation.toValue = 0.7
+                    } else if tempBeacon >= 0.8 && tempBeacon < 1.1 {
+                        rangeToBeaconAnimation.toValue = 0.5
+                    } else if tempBeacon >= 1.1 && tempBeacon < 1.5 {
+                        rangeToBeaconAnimation.toValue = 0.4
+                    } else if tempBeacon >= 1.5 && tempBeacon < 2.0 {
+                        rangeToBeaconAnimation.toValue = 0.2
+                    } else {
                         rangeToBeaconAnimation.toValue = 0.0
                     }
                 } else {
@@ -361,28 +357,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
                     tempBeaconMinor = iBeacon.minor as! Int
                     if gefundeneBeacon.contains(tempBeaconMinor) {
                         let tempBeacon = iBeacon.accuracy
-                        lblAusgabe.text = String(tempBeacon)
+                        //lblAusgabe.text = String(tempBeacon)
                         //let vToValue = 1 - iBeacon.accuracy
-                        if tempBeacon < 0.5 {
+                        if tempBeacon < 0.6 {
                             isNear = true
-                            rangeToBeaconAnimation.toValue = 1
-                        }  else if tempBeacon >= 0.5 && tempBeacon < 0.8 {
-                            isNear = false
-                            rangeToBeaconAnimation.toValue = 0.7
-                        } else if tempBeacon >= 0.5 && tempBeacon < 0.8 {
-                            isNear = false
-                            rangeToBeaconAnimation.toValue = 0.7
-                        } else if tempBeacon >= 0.8 && tempBeacon < 1.1 {
-                            isNear = false
-                            rangeToBeaconAnimation.toValue = 0.5
-                        } else if tempBeacon >= 1.1 && tempBeacon < 1.5 {
-                            isNear = false
-                            rangeToBeaconAnimation.toValue = 0.4
-                        } else if tempBeacon >= 1.5 && tempBeacon < 2.0 {
-                            isNear = false
-                            rangeToBeaconAnimation.toValue = 0.2
                         } else {
                             isNear = false
+                        }
+                        if tempBeacon < 0.6 {
+                            rangeToBeaconAnimation.toValue = 1
+                        }  else if tempBeacon >= 0.6 && tempBeacon < 0.8 {
+                            rangeToBeaconAnimation.toValue = 0.7
+                        } else if tempBeacon >= 0.8 && tempBeacon < 1.1 {
+                            rangeToBeaconAnimation.toValue = 0.5
+                        } else if tempBeacon >= 1.1 && tempBeacon < 1.5 {
+                            rangeToBeaconAnimation.toValue = 0.4
+                        } else if tempBeacon >= 1.5 && tempBeacon < 2.0 {
+                            rangeToBeaconAnimation.toValue = 0.2
+                        } else {
                             rangeToBeaconAnimation.toValue = 0.0
                         }
                     } else {
@@ -390,27 +382,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
                         tempBeaconMinor = iBeacon.minor as! Int
                         if gefundeneBeacon.contains(tempBeaconMinor) {
                             let tempBeacon = iBeacon.accuracy
-                            lblAusgabe.text = String(tempBeacon)
-                            if tempBeacon < 0.5 {
+                            //lblAusgabe.text = String(tempBeacon)
+                            if tempBeacon < 0.6 {
                                 isNear = true
-                                rangeToBeaconAnimation.toValue = 1
-                            }  else if tempBeacon >= 0.5 && tempBeacon < 0.8 {
-                                isNear = false
-                                rangeToBeaconAnimation.toValue = 0.7
-                            } else if tempBeacon >= 0.5 && tempBeacon < 0.8 {
-                                isNear = false
-                                rangeToBeaconAnimation.toValue = 0.7
-                            } else if tempBeacon >= 0.8 && tempBeacon < 1.1 {
-                                isNear = false
-                                rangeToBeaconAnimation.toValue = 0.5
-                            } else if tempBeacon >= 1.1 && tempBeacon < 1.5 {
-                                isNear = false
-                                rangeToBeaconAnimation.toValue = 0.4
-                            } else if tempBeacon >= 1.5 && tempBeacon < 2.0 {
-                                isNear = false
-                                rangeToBeaconAnimation.toValue = 0.2
                             } else {
                                 isNear = false
+                            }
+                            if tempBeacon < 0.6 {
+                                rangeToBeaconAnimation.toValue = 1
+                            }  else if tempBeacon >= 0.6 && tempBeacon < 0.8 {
+                                rangeToBeaconAnimation.toValue = 0.7
+                            } else if tempBeacon >= 0.8 && tempBeacon < 1.1 {
+                                rangeToBeaconAnimation.toValue = 0.5
+                            } else if tempBeacon >= 1.1 && tempBeacon < 1.5 {
+                                rangeToBeaconAnimation.toValue = 0.4
+                            } else if tempBeacon >= 1.5 && tempBeacon < 2.0 {
+                                rangeToBeaconAnimation.toValue = 0.2
+                            } else {
                                 rangeToBeaconAnimation.toValue = 0.0
                             }
                             //let vToValue = 1 - iBeacon.accuracy
@@ -473,6 +461,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
             }
         case 4:
             if NummerTemp == true {
+                btnFire.isUserInteractionEnabled = true
                 pointShapeLayer1.strokeEnd = 1
                 pointShapeLayer2.strokeEnd = 1
                 pointShapeLayer3.strokeEnd = 1
@@ -494,7 +483,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
     @objc func addFire() {
         timerCountFireWork = timerCountFireWork + 1
         if timerCountFireWork <= 2 {
-        } else if timerCountFireWork >= 2 && timerCountFireWork <= 30 {
+        } else if timerCountFireWork >= 2 && timerCountFireWork <= 20 {
             let lower: UInt32 = 10
             let upper: UInt32 = UInt32(UIScreen.main.bounds.width)
             let pop = PopView()
