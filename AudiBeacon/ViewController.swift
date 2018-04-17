@@ -252,8 +252,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
         vPointZaehler = 0
         finished = false
         gefundeneBeacon = [58690, 16713, 42263, 24984]
-        btnQuestionView.isHidden = false
-        btnQuestionView.isUserInteractionEnabled = true
         trackLayerBeacon.isHidden = false
         shapeLayerBeaconRange.isHidden = false
         trackPoint1.isHidden = false
@@ -263,6 +261,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
         pulsatingLayerBeacon.isHidden = false
         finishAnimationTimer()
         repeatTimer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(ViewController.repeatTimerPoints), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.timerFunc), userInfo: nil, repeats: true)
         print(vPointZaehler)
         print(gefundeneBeacon)
         
