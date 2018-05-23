@@ -243,9 +243,9 @@ class QuestionView: UIViewController {
         lblFrage.font = UIFont(name: "AudiType-ExtendedBold", size: 15)!
         lblFrage.textColor = UIColor.white
         switch vMinorTemp {
-        case 58690: rand = 0
+        case 35885: rand = 0
             lblFrage.text = "Wie funktionieren iBeacons?"
-        case 24984: rand = 1
+        case 22438: rand = 1
             lblFrage.text = "Wie weit gehen iBeacons?"
         case 42263: rand = 2
             lblFrage.text = "iBeacons sind zum.."

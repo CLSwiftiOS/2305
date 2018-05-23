@@ -32,17 +32,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
     @IBOutlet weak var btnFire: UIButton!
     @IBOutlet weak var btnRepeat: UIButton!
     
-    
+    var center14 = CGPoint()
     var repeatBool : Bool = false
     var blueManager: CBCentralManager!
     var tempBeaconMinor = 0
-    var gefundeneBeacon = [58690, 16713, 42263, 24984]
+    var gefundeneBeacon = [35885, 22438, /*58690, 16713,*/ 42263, 24984]
     var vPointZaehler = 0
     let shaperLineWidth: CGFloat = 20
     let finishPath = UIBezierPath(arcCenter: .zero, radius: 120, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-    let circularPath3 = UIBezierPath(arcCenter: .zero, radius: 80, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-    let circularPuls = UIBezierPath(arcCenter: .zero, radius: 90, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-    var pointPath = UIBezierPath(arcCenter: .zero, radius: 30, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+    var circularPath3 = UIBezierPath()
+    var circularPuls = UIBezierPath()
+    var pointPath = UIBezierPath()
+    var pointPath4 = UIBezierPath()
     var isNear = false
     var finished = false
     let trackPoint1 = CAShapeLayer()
@@ -100,6 +101,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
     }
    
     override func viewDidLoad() {
+        
         btnFire.isUserInteractionEnabled = false
         //isNear = true wird nur für den Simulator benötigt, da kein Bluetooth
         btnRepeat.isHidden = true
@@ -126,6 +128,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
         if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse) {
             locationManager.requestWhenInUseAuthorization()
         }
+       
     }
     
 
@@ -200,23 +203,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
             moveAnimation.duration = 1.0
             vPoition = pointShapeLayer1.position
             moveAnimation.fromValue = vPoition
-            pointShapeLayer1.position = view11.center
-            moveAnimation.toValue = view11.center
+            pointShapeLayer1.position = CGPoint(x: view.frame.width/8, y: view.frame.height/9)
+            moveAnimation.toValue = CGPoint(x: view.frame.width/8, y: view.frame.height/9)
             pointShapeLayer1.add(moveAnimation, forKey: "move")
             vPoition = pointShapeLayer2.position
             moveAnimation.fromValue = vPoition
-            pointShapeLayer2.position = view12.center
-            moveAnimation.toValue = view12.center
+            pointShapeLayer2.position = CGPoint(x: view.frame.width/8*3, y: view.frame.height/9)
+            moveAnimation.toValue = CGPoint(x: view.frame.width/8*3, y: view.frame.height/9)
             pointShapeLayer2.add(moveAnimation, forKey: "move")
             vPoition = pointShapeLayer3.position
             moveAnimation.fromValue = vPoition
-            pointShapeLayer3.position = view13.center
-            moveAnimation.toValue = view13.center
+            pointShapeLayer3.position = CGPoint(x: view.frame.width/8*5, y: view.frame.height/9)
+            moveAnimation.toValue = CGPoint(x: view.frame.width/8*5, y: view.frame.height/9)
             pointShapeLayer3.add(moveAnimation, forKey: "move")
             vPoition = pointShapeLayer4.position
             moveAnimation.fromValue = vPoition
-            pointShapeLayer4.position = view14.center
-            moveAnimation.toValue = view14.center
+            pointShapeLayer4.position = CGPoint(x: view.frame.width/8*7, y: view.frame.height/9)
+            moveAnimation.toValue = CGPoint(x: view.frame.width/8*7, y: view.frame.height/9)
             pointShapeLayer4.add(moveAnimation, forKey: "move")
         }
     }
@@ -251,7 +254,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
         showText()
         vPointZaehler = 0
         finished = false
-        gefundeneBeacon = [58690, 16713, 42263, 24984]
+        gefundeneBeacon = [35885, 22438, 42263, 24984]
         trackLayerBeacon.isHidden = false
         shapeLayerBeaconRange.isHidden = false
         trackPoint1.isHidden = false
@@ -326,7 +329,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
                 } else {
                     rangeToBeaconAnimation.toValue = 0.0
                 }
-            } else {
+            } else if knowBeacons.count > 1 {
                 iBeacon = knowBeacons[1]
                 tempBeaconMinor = iBeacon.minor as! Int
                 if gefundeneBeacon.contains(tempBeaconMinor) {
@@ -351,7 +354,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
                     } else {
                         rangeToBeaconAnimation.toValue = 0.0
                     }
-                } else {
+                } else if knowBeacons.count > 2 {
                     iBeacon = knowBeacons[2]
                     tempBeaconMinor = iBeacon.minor as! Int
                     if gefundeneBeacon.contains(tempBeaconMinor) {
@@ -376,7 +379,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
                         } else {
                             rangeToBeaconAnimation.toValue = 0.0
                         }
-                    } else {
+                } else if knowBeacons.count > 3 {
                         iBeacon = knowBeacons[3]
                         tempBeaconMinor = iBeacon.minor as! Int
                         if gefundeneBeacon.contains(tempBeaconMinor) {
@@ -440,7 +443,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
             pointShapeLayer1.add(pointIsRealAnimation, forKey: "point1Animation")
         } else {
             pointShapeLayer1.strokeEnd = 1}
-        case 2:
+        case 4:
             if NummerTemp == true {
                 pointShapeLayer1.strokeEnd = 1
                 pointShapeLayer2.add(pointIsRealAnimation, forKey: "point2Animation")
@@ -458,7 +461,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
                 pointShapeLayer2.strokeEnd = 1
                 pointShapeLayer3.strokeEnd = 1
             }
-        case 4:
+        case 2:
             if NummerTemp == true {
                 btnFire.isUserInteractionEnabled = true
                 pointShapeLayer1.strokeEnd = 1
@@ -496,7 +499,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
     private func setActionButton() {
         let widthActionButton: CGFloat = 80
         let heightActionButton: CGFloat = 80
-        btnQuestionView.frame = CGRect(x: view3.center.x - widthActionButton/2, y: view3.center.y - heightActionButton/2, width: widthActionButton, height: heightActionButton)
+        btnQuestionView.frame = CGRect(x: view.center.x - widthActionButton/2, y: view.center.y - heightActionButton/2, width: widthActionButton, height: heightActionButton)
         btnQuestionView.backgroundColor = UIColor.backgroundColor
         btnQuestionView.setTitleColor(UIColor.redAudi, for: .normal)
         btnQuestionView.tag = 89
@@ -510,20 +513,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
     }
     
     private func setTrackPoints() {
+        
+        var center = CGPoint()
+        print(view.frame.width)
+        print(view11.frame.width)
+        print(view.frame.height)
+        pointPath = UIBezierPath(arcCenter: .zero, radius: 30, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+        
+        circularPath3 = UIBezierPath(arcCenter: .zero, radius: 80, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+        circularPuls = UIBezierPath(arcCenter: .zero, radius: 90, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+        
         locationManager.startRangingBeacons(in: region)
         pulsatingLayerBeacon = CAShapeLayer()
         pulsatingLayerBeacon.path = circularPuls.cgPath
         pulsatingLayerBeacon.fillColor = UIColor.redAudiAlpha.cgColor
-        pulsatingLayerBeacon.position = view3.center
+        pulsatingLayerBeacon.position = view.center
         view.layer.addSublayer(pulsatingLayerBeacon)
         trackLayerBeacon.path = circularPath3.cgPath
         trackLayerBeacon.strokeColor = UIColor.darkGray.cgColor
         trackLayerBeacon.fillColor = UIColor.backgroundColor.cgColor
         trackLayerBeacon.lineWidth = shaperLineWidth
         trackLayerBeacon.lineCap = kCALineCapRound
-        trackLayerBeacon.position = view3.center
+        trackLayerBeacon.position = view.center
         view.layer.addSublayer(trackLayerBeacon)
-        shapeLayerBeaconRange.position = view3.center
+        shapeLayerBeaconRange.position = view.center
         shapeLayerBeaconRange.path = circularPath3.cgPath
         shapeLayerBeaconRange.strokeColor = UIColor.outlineStrokeColor.cgColor
         shapeLayerBeaconRange.lineWidth = shaperLineWidth
@@ -535,61 +548,86 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
         pointIsRealAnimation.duration = 1
         pointIsRealAnimation.isRemovedOnCompletion = false
         pointIsRealAnimation.fillMode = kCAFillModeForwards
+        
+        
+        center = CGPoint(x: view.frame.width/8, y: view.frame.height/9)
+        
+        
         trackPoint1.path = pointPath.cgPath
         trackPoint1.strokeColor = UIColor.whiteAudi.cgColor
         trackPoint1.fillColor = UIColor.clear.cgColor
         trackPoint1.lineWidth = 7
         trackPoint1.lineCap = kCALineCapRound
-        trackPoint1.position = view11.center
+        trackPoint1.position = center
+        
+        center = CGPoint(x: view.frame.width/8*3, y: view.frame.height/9)
+        
         trackPoint2.path = pointPath.cgPath
         trackPoint2.strokeColor = UIColor.whiteAudi.cgColor
         trackPoint2.fillColor = UIColor.clear.cgColor
         trackPoint2.lineWidth = 7
         trackPoint2.lineCap = kCALineCapRound
-        trackPoint2.position = view12.center
+        trackPoint2.position = center
+        
+        center = CGPoint(x: view.frame.width/8*5, y: view.frame.height/9)
+        
         trackPoint3.path = pointPath.cgPath
         trackPoint3.strokeColor = UIColor.whiteAudi.cgColor
         trackPoint3.fillColor = UIColor.clear.cgColor
         trackPoint3.lineWidth = 7
         trackPoint3.lineCap = kCALineCapRound
-        trackPoint3.position = view13.center
+        trackPoint3.position = center
+        
+        center = CGPoint(x: view.frame.width/8*7, y: view.frame.height/9)
+        
         trackPoint4.path = pointPath.cgPath
         trackPoint4.strokeColor = UIColor.whiteAudi.cgColor
         trackPoint4.fillColor = UIColor.clear.cgColor
         trackPoint4.lineWidth = 7
         trackPoint4.lineCap = kCALineCapRound
-        trackPoint4.position = view14.center
+        trackPoint4.position = center
         view.layer.addSublayer(trackPoint1)
         view.layer.addSublayer(trackPoint2)
         view.layer.addSublayer(trackPoint3)
         view.layer.addSublayer(trackPoint4)
         
+        center = CGPoint(x: view.frame.width/8, y: view.frame.height/9)
+        
         pointShapeLayer1.path = pointPath.cgPath
-        pointShapeLayer1.position = view11.center
+        pointShapeLayer1.position = center
         pointShapeLayer1.strokeColor = UIColor.white.cgColor
         pointShapeLayer1.lineCap = kCALineCapRound
         pointShapeLayer1.fillColor = UIColor.clear.cgColor
         pointShapeLayer1.lineWidth = 6
         pointShapeLayer1.strokeEnd = 0
         view.layer.addSublayer(pointShapeLayer1)
+        
+        center = CGPoint(x: view.frame.width/8*3, y: view.frame.height/9)
+        
         pointShapeLayer2.path = pointPath.cgPath
-        pointShapeLayer2.position = view12.center
+        pointShapeLayer2.position = center
         pointShapeLayer2.strokeColor = UIColor.white.cgColor
         pointShapeLayer2.lineCap = kCALineCapRound
         pointShapeLayer2.fillColor = UIColor.clear.cgColor
         pointShapeLayer2.lineWidth = 6
         pointShapeLayer2.strokeEnd = 0
         view.layer.addSublayer(pointShapeLayer2)
+        
+        center = CGPoint(x: view.frame.width/8*5, y: view.frame.height/9)
+        
         pointShapeLayer3.path = pointPath.cgPath
-        pointShapeLayer3.position = view13.center
+        pointShapeLayer3.position = center
         pointShapeLayer3.strokeColor = UIColor.white.cgColor
         pointShapeLayer3.lineCap = kCALineCapRound
         pointShapeLayer3.fillColor = UIColor.clear.cgColor
         pointShapeLayer3.lineWidth = 6
         pointShapeLayer3.strokeEnd = 0
         view.layer.addSublayer(pointShapeLayer3)
+        
+        center = CGPoint(x: view.frame.width/8*7, y: view.frame.height/9)
+        
         pointShapeLayer4.path = pointPath.cgPath
-        pointShapeLayer4.position = view14.center
+        pointShapeLayer4.position = center
         pointShapeLayer4.strokeColor = UIColor.white.cgColor
         pointShapeLayer4.lineCap = kCALineCapRound
         pointShapeLayer4.fillColor = UIColor.clear.cgColor
@@ -602,6 +640,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBCentralMana
         finishLayer.lineCap = kCALineCapRound
         finishLayer.fillColor = UIColor.clear.cgColor
         finishLayer.lineWidth = 5
+        
     }
     
     func setBackGroundClear() {
