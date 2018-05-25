@@ -689,7 +689,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.web-dienstleister.de.iBeaconApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5ff11eb4-cb4e-475c-a9ee-463b1da466a6";
+				PROVISIONING_PROFILE = "b8640b90-22d6-4640-a786-d804470ff52f";
 				PROVISIONING_PROFILE_SPECIFIER = iBeaconTest;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -711,7 +711,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.web-dienstleister.de.iBeaconApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5ff11eb4-cb4e-475c-a9ee-463b1da466a6";
+				PROVISIONING_PROFILE = "b8640b90-22d6-4640-a786-d804470ff52f";
 				PROVISIONING_PROFILE_SPECIFIER = iBeaconTest;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

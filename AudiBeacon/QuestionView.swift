@@ -174,7 +174,6 @@ class QuestionView: UIViewController {
     }
     
     func setAnswers() {
-        
         randomTag = Int(arc4random_uniform(UInt32(4))) + 1
         if let button: UIButton = self.view.viewWithTag(randomTag) as? UIButton {
             switch randomTag {
@@ -200,7 +199,7 @@ class QuestionView: UIViewController {
                     case 4: button.setTitle("   D: \(antworten[rand][randTemp])", for: .normal)
                     default: print("random Tag setAnswers")
                     }
-                    antworten[rand].remove(at: randTemp)
+                   antworten[rand].remove(at: randTemp)
                 }
             }
         }
@@ -239,7 +238,7 @@ class QuestionView: UIViewController {
         lblTimer.textColor = UIColor.white
         lblTimer.text = ""
         lblTimer.font = UIFont(name: "AudiType-ExtendedBold", size: 50)
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(QuestionView.setTime), userInfo: nil, repeats: true)
+        lblTimer.text = "15"
         lblFrage.font = UIFont(name: "AudiType-ExtendedBold", size: 15)!
         lblFrage.textColor = UIColor.white
         switch vMinorTemp {
@@ -247,9 +246,9 @@ class QuestionView: UIViewController {
             lblFrage.text = "Wie funktionieren iBeacons?"
         case 22438: rand = 1
             lblFrage.text = "Wie weit gehen iBeacons?"
-        case 42263: rand = 2
+        case 3290: rand = 2
             lblFrage.text = "iBeacons sind zum.."
-        case 16713: rand = 3
+        case 22936: rand = 3
             lblFrage.text = "BLE = Bluetooth"
         default: print("kein Beacon übergeben setQuestion")
         }
@@ -271,7 +270,8 @@ class QuestionView: UIViewController {
     
     @IBAction func btnRestart(_ sender: Any) {
         lblTimer.text = ""
-        time = 15
+        time = 14
+        lblTimer.text = "15"
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(QuestionView.setTime), userInfo: nil, repeats: true)
         lblTimer.font = UIFont(name: "AudiType-ExtendedBold", size: 50)
         for i in 1...4 {
@@ -282,6 +282,8 @@ class QuestionView: UIViewController {
     }
     
     func setup() {
+        time = 14
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(QuestionView.setTime), userInfo: nil, repeats: true)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(QuestionView.tapGestureFunction))
         btnRestart.isUserInteractionEnabled = false
         btnRestart.isHidden = true
@@ -290,7 +292,6 @@ class QuestionView: UIViewController {
         redAudiWrong = UIColor.wrongRed
         rand = 0
         fontAudi = "AudiType-Normal"
-        time = 15
         randomTag = 0
         vRichtig = false
     }
